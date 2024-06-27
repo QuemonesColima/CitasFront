@@ -1,11 +1,13 @@
+import React from "react";
 import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
 import { darkColors, lightColors } from "@/constants/Theme";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, useLocalSearchParams } from "expo-router";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { user } = useLocalSearchParams();
 
   let themeToApply = MD3LightTheme;
   let colorsToApply = lightColors;
@@ -21,6 +23,7 @@ export default function TabLayout() {
       ...colorsToApply.colors,
     },
   };
+  console.log("Parámetros recibidos en TabLayout:", user);
 
   return (
     <PaperProvider theme={theme}>
@@ -39,6 +42,7 @@ export default function TabLayout() {
               <Ionicons name="home-outline" size={24} color={color} />
             ),
           }}
+          initialParams={{ user }}
         />
         <Tabs.Screen
           name="calendar"
@@ -48,6 +52,7 @@ export default function TabLayout() {
               <Ionicons name="calendar-outline" size={24} color={color} />
             ),
           }}
+          initialParams={{ user }}
         />
         <Tabs.Screen
           name="messages"
@@ -61,8 +66,8 @@ export default function TabLayout() {
               />
             ),
           }}
+          initialParams={{ user }}
         />
-
         <Tabs.Screen
           name="profile"
           options={{
@@ -71,6 +76,7 @@ export default function TabLayout() {
               <Ionicons name="person-outline" size={24} color={color} />
             ),
           }}
+          initialParams={{ user }}
         />
       </Tabs>
     </PaperProvider>
