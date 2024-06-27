@@ -1,37 +1,78 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
+import { darkColors, lightColors } from "@/constants/Theme";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  let themeToApply = MD3LightTheme;
+  let colorsToApply = lightColors;
+
+  if (colorScheme === "dark") {
+    themeToApply = MD3DarkTheme;
+    colorsToApply = darkColors;
+  }
+
+  const theme = {
+    ...themeToApply,
+    colors: {
+      ...colorsToApply.colors,
+    },
+  };
+
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+    <PaperProvider theme={theme}>
+      <Tabs
+        screenOptions={{
+          tabBarStyle: { backgroundColor: colorsToApply.colors.background },
+          tabBarActiveTintColor: colorsToApply.colors.primary,
+          headerShown: false,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="home-outline" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="calendar"
+          options={{
+            title: "Calendario",
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="calendar-outline" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="messages"
+          options={{
+            title: "Mensajes",
+            tabBarIcon: ({ color }) => (
+              <Ionicons
+                name="chatbubble-ellipses-outline"
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Perfil",
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="person-outline" size={24} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
+    </PaperProvider>
   );
 }
