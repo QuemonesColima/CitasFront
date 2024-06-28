@@ -69,8 +69,9 @@ const LoginScreen = ({}) => {
         if (data.success) {
           // navigation.navigate("Home");
           // navigation.navigate("(tabs)");
+          const userString = JSON.stringify(data);
           console.log("USUARIO", data);
-          navigation.navigate("(tabs)", { user: data });
+          navigation.navigate("(tabs)", { user: userString });
         } else {
           Alert.alert("Error de inicio de sesión", "Credenciales inválidas");
         }

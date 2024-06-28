@@ -3,11 +3,11 @@ import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
 import { darkColors, lightColors } from "@/constants/Theme";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs, useLocalSearchParams } from "expo-router";
+import { Tabs, useGlobalSearchParams } from "expo-router";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { user } = useLocalSearchParams();
+  const glob = useGlobalSearchParams();
 
   let themeToApply = MD3LightTheme;
   let colorsToApply = lightColors;
@@ -23,7 +23,8 @@ export default function TabLayout() {
       ...colorsToApply.colors,
     },
   };
-  console.log("Parámetros recibidos en TabLayout:", user);
+  console.log("Parámetros recibidos en TabLayout:", glob);
+  //console.log("Parámetros recibidos en TabLayout:", everything);
 
   return (
     <PaperProvider theme={theme}>
@@ -42,7 +43,7 @@ export default function TabLayout() {
               <Ionicons name="home-outline" size={24} color={color} />
             ),
           }}
-          initialParams={{ user }}
+          // initialParams={{ user }}
         />
         <Tabs.Screen
           name="calendar"
@@ -52,7 +53,7 @@ export default function TabLayout() {
               <Ionicons name="calendar-outline" size={24} color={color} />
             ),
           }}
-          initialParams={{ user }}
+          //  initialParams={{ user }}
         />
         <Tabs.Screen
           name="messages"
@@ -66,7 +67,7 @@ export default function TabLayout() {
               />
             ),
           }}
-          initialParams={{ user }}
+          //initialParams={{ user }}
         />
         <Tabs.Screen
           name="profile"
@@ -76,7 +77,7 @@ export default function TabLayout() {
               <Ionicons name="person-outline" size={24} color={color} />
             ),
           }}
-          initialParams={{ user }}
+          initialParams={glob}
         />
       </Tabs>
     </PaperProvider>

@@ -35,7 +35,7 @@ const RegisterScreen = ({}) => {
   const [loading, setLoading] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-
+  /* 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -54,8 +54,21 @@ const RegisterScreen = ({}) => {
       setProfileImage(`data:image/jpeg;base64,${base64Image}`);
     }
   };
+ */
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
 
-  const handleRegister = () => {
+    if (!result.canceled) {
+      setProfileImage(result.assets[0].uri);
+    }
+  };
+
+  /*   const handleRegister = () => {
     if (!phoneNumber || !password || !clientName || !confirmPassword) {
       Alert.alert("Error", "Por favor, complete todos los campos requeridos.");
       return;
@@ -124,6 +137,72 @@ const RegisterScreen = ({}) => {
           Alert.alert("Error de Red", error.message);
         }
       });
+  }; */
+  const handleRegister = async () => {
+    if (!phoneNumber || !password || !clientName || !confirmPassword) {
+      Alert.alert("Error", "Por favor, complete todos los campos requeridos.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+      return;
+    } else {
+      setPasswordsMatch(true);
+    }
+
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("phone_number", phoneNumber);
+    formData.append("password", password);
+    formData.append("is_owner", isOwner);
+    formData.append("client_name", clientName);
+    if (profileImage) {
+      let localUri = profileImage;
+      let filename = localUri.split("/").pop();
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? `image/${match[1]}` : `image`;
+      formData.append("profile_image", { uri: localUri, name: filename, type });
+    }
+
+    try {
+      const response = await fetch("http://192.168.1.70:3000/register", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error);
+      }
+
+      const data = await response.json();
+      setLoading(false);
+      Alert.alert(
+        "Registro exitoso",
+        "El usuario ha sido registrado exitosamente"
+      );
+      navigation.navigate("index");
+    } catch (error) {
+      setLoading(false);
+      if (error.message === "Campos incompletos") {
+        Alert.alert(
+          "Error",
+          "Por favor, complete todos los campos requeridos."
+        );
+      } else if (error.message === "Timeout") {
+        Alert.alert(
+          "Error de Red",
+          "La solicitud ha tardado demasiado. Por favor, inténtelo de nuevo."
+        );
+      } else {
+        Alert.alert("Error de Red", error.message);
+      }
+    }
   };
 
   return (
