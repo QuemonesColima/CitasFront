@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
-  View,
-  Text,
   Alert,
   ScrollView,
   KeyboardAvoidingView,
@@ -12,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { View, Text } from "@/components/Themed";
 import {
   TextInput,
   Button,
@@ -207,18 +205,12 @@ const RegisterScreen = ({}) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
+      <View style={styles.container}>
         <KeyboardAvoidingView
           behavior="position"
           style={{ flex: 1, width: "80%" }}
         >
           <ScrollView contentContainerStyle={styles.scrollContainer}>
-            <Text style={[styles.tituloLabel, { color: colors.linkText }]}>
-              A continuación rellene los campos siguientes
-            </Text>
-
             <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
               {profileImage ? (
                 <Image source={{ uri: profileImage }} style={styles.image} />
@@ -235,6 +227,7 @@ const RegisterScreen = ({}) => {
               onChangeText={setPhoneNumber}
               style={styles.input}
               keyboardType="phone-pad"
+              mode="outlined"
             />
             <TextInput
               label="Contraseña"
@@ -246,6 +239,7 @@ const RegisterScreen = ({}) => {
               }}
               style={styles.input}
               secureTextEntry
+              mode="outlined"
             />
             <TextInput
               label="Confirmar Contraseña"
@@ -257,6 +251,7 @@ const RegisterScreen = ({}) => {
               }}
               style={styles.input}
               secureTextEntry
+              mode="outlined"
             />
             {!passwordsMatch && (
               <Text style={styles.errorText}>Las contraseñas no coinciden</Text>
@@ -266,14 +261,15 @@ const RegisterScreen = ({}) => {
               value={clientName}
               onChangeText={setClientName}
               style={styles.input}
+              mode="outlined"
             />
             <View style={styles.checkboxContainer}>
               <Switch
                 value={isOwner ? true : false}
                 onValueChange={() => setIsOwner(!isOwner)}
               />
-              <Text style={[styles.checkboxLabel, { color: colors.linkText }]}>
-                ¿ Usted es dueño de un local?
+              <Text style={styles.checkboxLabel}>
+                ¿ Usted es dueño de un local ?
               </Text>
             </View>
 
@@ -285,12 +281,12 @@ const RegisterScreen = ({}) => {
                 onPress={handleRegister}
                 buttonColor={colors.primary}
               >
-                <Text style={{ color: colors.buttonText }}>Registrarse</Text>
+                <Text>Registrarse</Text>
               </Button>
             )}
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -300,7 +296,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    padding: 16,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -314,13 +310,13 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    marginBottom: 12,
-    borderRadius: 4,
+    marginBottom: 16,
+    borderRadius: 8,
   },
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 16,
   },
   checkboxLabel: {
     marginLeft: 8,
@@ -335,8 +331,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "#ddd",
     borderWidth: 1,
-    borderRadius: 75,
-    marginBottom: 12,
+    borderRadius: 80,
+    marginBottom: 16,
     overflow: "hidden",
   },
   imagePickerText: {
@@ -346,11 +342,11 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
-    borderRadius: 75,
+    borderRadius: 80,
   },
   errorText: {
     color: "red",
-    marginBottom: 12,
+    marginBottom: 16,
   },
 });
 
