@@ -165,7 +165,7 @@ const RegisterScreen = ({}) => {
     }
 
     try {
-      const response = await fetch("http://192.168.1.70:3000/register", {
+      const response = await fetch("http://192.168.1.65:3000/register", {
         method: "POST",
         body: formData,
         headers: {
