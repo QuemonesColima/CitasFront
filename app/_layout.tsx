@@ -10,9 +10,9 @@ import {
   MD3LightTheme,
 } from "react-native-paper";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { lightColors, darkColors } from "@/constants/Theme";
 import { Platform } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -54,11 +54,19 @@ function RootLayoutNav() {
   };
 
   return (
-    <PaperProvider theme={theme}>
-      <Stack>
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </PaperProvider>
+    <SafeAreaView
+      style={{ flex: 1 }}
+      edges={{
+        bottom: Platform.OS === "ios" ? "off" : undefined,
+        top: "additive",
+      }}
+    >
+      <PaperProvider theme={theme}>
+        <Stack>
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </PaperProvider>
+    </SafeAreaView>
   );
 }
