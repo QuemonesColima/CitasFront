@@ -45,7 +45,7 @@ export default function ProfileScreen() {
         {user.profile_image ? (
           <Image
             source={{
-              uri: `http://192.168.1.70:3000/uploads/${user.profile_image}`,
+              uri: `http://192.168.1.65:3000/uploads/${user.profile_image}`,
             }}
             style={styles.profileImage}
           />

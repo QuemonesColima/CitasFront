@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
+import React from "react";
 
 interface ThemeProps {
   lightColor?: string;

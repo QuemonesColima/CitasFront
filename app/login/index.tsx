@@ -48,7 +48,7 @@ const LoginScreen: React.FC = () => {
       ]);
     };
 
-    fetchWithTimeout("http://192.168.1.70:3000/login", {
+    fetchWithTimeout("http://192.168.1.65:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,9 +1,16 @@
 import React from "react";
-import { View, Text } from "@/components/Themed";
+import { StyleSheet } from "react-native";
+import Container from "@/components/Container";
+import Titulo from "@/components/Titulo";
+import GridScreen from "./components/GridScreen";
+
 export default function HomeScreen() {
   return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
+    <Container>
+      <Titulo text="Explora las opciones" />
+      <GridScreen />
+    </Container>
   );
 }
+
+const styles = StyleSheet.create({});
