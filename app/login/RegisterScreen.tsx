@@ -90,7 +90,7 @@ const RegisterScreen = ({}) => {
       ]);
     };
 
-    fetchWithTimeout("http://192.168.1.70:3000/register", {
+    fetchWithTimeout("http://192.168.1.65:3000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -45,16 +45,7 @@ export default function TabLayout() {
           }}
           // initialParams={{ user }}
         />
-        <Tabs.Screen
-          name="calendar"
-          options={{
-            title: "Calendario",
-            tabBarIcon: ({ color }) => (
-              <Ionicons name="calendar-outline" size={24} color={color} />
-            ),
-          }}
-          //  initialParams={{ user }}
-        />
+
         <Tabs.Screen
           name="messages"
           options={{
