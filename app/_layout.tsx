@@ -9,9 +9,10 @@ import {
   MD3LightTheme,
 } from "react-native-paper";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { lightColors, darkColors } from "@/constants/Theme";
 import { Platform, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -67,6 +68,7 @@ function RootLayoutNav() {
         </Stack>
       </SafeAreaView>
     </PaperProvider>
+
   );
 }
 
