@@ -1,3 +1,4 @@
+// home/routes/_layout.tsx
 import React from "react";
 import { Stack } from "expo-router";
 import { Colors } from "@/constants/Colors";
@@ -49,6 +50,13 @@ export default function MainLayout() {
         options={{
           title: "Automotriz",
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="automotriz/[id]/index"
+        options={{
+          title: "Detalles del Producto",
+          headerShown: false, // Cambia esto a false para ocultar el header
         }}
       />
       <Stack.Screen

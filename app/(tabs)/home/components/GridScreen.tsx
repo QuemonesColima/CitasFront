@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { View, ScrollView } from "@/components/Themed";
 import CardPlaces from "./CardPlaces";
-import services, { Service } from "@/constants/Services";
+import services from "@/constants/Services";
 import { useRouter } from "expo-router";
 
 const GridScreen: React.FC = () => {

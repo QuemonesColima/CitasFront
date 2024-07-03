@@ -2,17 +2,17 @@ import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import {
   Provider as PaperProvider,
   MD3DarkTheme,
   MD3LightTheme,
 } from "react-native-paper";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { lightColors, darkColors } from "@/constants/Theme";
 import { Platform, StyleSheet } from "react-native";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,6 +54,11 @@ function RootLayoutNav() {
 
   return (
     <PaperProvider theme={theme}>
+      <StatusBar
+        style={colorScheme === "dark" ? "light" : "dark"}
+        backgroundColor={theme.colors.background}
+        translucent={true}
+      />
       <SafeAreaView
         style={[styles.safeArea, { backgroundColor: theme.colors.background }]}
         edges={{
@@ -68,7 +73,6 @@ function RootLayoutNav() {
         </Stack>
       </SafeAreaView>
     </PaperProvider>
-
   );
 }
 
