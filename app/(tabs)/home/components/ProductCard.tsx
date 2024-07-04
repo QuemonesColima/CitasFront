@@ -61,7 +61,12 @@ const styles = StyleSheet.create({
     color: "green",
     fontWeight: "bold",
   },
-  rating: { padding: 4, backgroundColor: "#f2f2f2", color: "black" },
+  rating: {
+    padding: 4,
+    backgroundColor: "#f2f2f2",
+    color: "black",
+    borderRadius: 16,
+  },
 });
 
 export default ProductCard;

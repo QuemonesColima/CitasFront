@@ -15,6 +15,6 @@ const Titulo: React.FC<TituloProps> = ({ text, style, ...props }) => {
 };
 
 const styles = StyleSheet.create({
-  title: { fontSize: 32, fontWeight: "bold" },
+  title: { fontSize: 32, fontWeight: "bold", paddingTop: 8 },
 });
 export default Titulo;

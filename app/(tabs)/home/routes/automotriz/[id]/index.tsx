@@ -1,8 +1,10 @@
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { View, Text, ScrollView } from "@/components/Themed";
 import { Belleza } from "@/constants/Ejemplo";
+import Container from "@/components/Container";
+import ServiceHeader from "../../../components/ServiceHeader";
 
 export default function ProductDetail() {
   const { id } = useLocalSearchParams();
@@ -19,32 +21,23 @@ export default function ProductDetail() {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <Image source={{ uri: product.imageUrl }} style={styles.image} />
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.location}>{product.location}</Text>
-      <Text style={styles.description}>{product.description}</Text>
-      <Text style={styles.schedule}>{product.schedule}</Text>
-      <Text style={styles.rating}>Rating: {product.rating}</Text>
-    </ScrollView>
+    <>
+      <ServiceHeader image={product.imageUrl} title={product.name} />
+      <Container>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.location}>{product.location}</Text>
+          <Text style={styles.description}>{product.description}</Text>
+          <Text style={styles.schedule}>{product.schedule}</Text>
+          <Text>{product.Data.description}</Text>
+        </ScrollView>
+      </Container>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-  },
-  image: {
-    width: "100%",
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
   },
   location: {
     fontSize: 18,
