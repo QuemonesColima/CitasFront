@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: "100%",
     height: 112,
+    paddingTop: 8,
   },
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,

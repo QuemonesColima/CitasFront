@@ -54,24 +54,12 @@ function RootLayoutNav() {
 
   return (
     <PaperProvider theme={theme}>
-      <StatusBar
-        style={colorScheme === "dark" ? "light" : "dark"}
-        backgroundColor={theme.colors.background}
-        translucent={true}
-      />
-      <SafeAreaView
-        style={[styles.safeArea, { backgroundColor: theme.colors.background }]}
-        edges={{
-          bottom: Platform.OS === "ios" ? "off" : undefined,
-          top: "additive",
-        }}
-      >
-        <Stack>
-          <Stack.Screen name="login" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="calendar" options={{ headerShown: false }} />
-        </Stack>
-      </SafeAreaView>
+      <StatusBar translucent={true} />
+      <Stack>
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="calendar" options={{ headerShown: false }} />
+      </Stack>
     </PaperProvider>
   );
 }
